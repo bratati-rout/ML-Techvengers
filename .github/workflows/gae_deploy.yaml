@@ -2,9 +2,6 @@ name: Deploy to Google App Engine
 
 on:
   push:
-    paths:
-      - 'tdf-bart.py'
-      - 'gae_deploy.yaml'
     branches:
       - main
 
