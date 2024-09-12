@@ -13,6 +13,7 @@ import torch
 # Load the BART model and tokenizer
 @st.cache_resource
 def load_bart_model():
+    
     tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
     model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
     return tokenizer, model
