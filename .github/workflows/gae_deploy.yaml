@@ -1,0 +1,35 @@
+name: Deploy to Google App Engine
+
+on:
+  push:
+    paths:
+      - 'tdf-bart.py'
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Deploy to Google App Engine
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_APPLICATION_CREDENTIALS" > /tmp/credentials.json
+        gcloud auth activate-service-account --key-file=/tmp/credentials.json
+        gcloud config set project ${{ secrets.GOOGLE_PROJECT_ID }}
+        gcloud app deploy --quiet
