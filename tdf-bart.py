@@ -98,7 +98,6 @@ def extractive_summary_with_keywords(text, keywords, num_sentences=7):
     # Get top N sentences for the summary
     ranked_sentences = sorted(((sentence_scores[i], s) for i, s in enumerate(sentences)), reverse=True)
     summary = ' '.join([ranked_sentences[i][1] for i in range(min(num_sentences, len(ranked_sentences)))])
-
     return summary
 
 # BART Abstractive Summarization
