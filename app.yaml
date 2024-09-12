@@ -1,7 +1,4 @@
 runtime: python39
-
-entrypoint: gunicorn -b :$PORT main:app
-
 automatic_scaling:
   min_instances: 1
   max_instances: 10
@@ -11,3 +8,8 @@ automatic_scaling:
 handlers:
   - url: /.*
     script: auto
+
+env_variables:
+  PORT: 8080
+
+entrypoint: streamlit run tdf-bart.py --server.port $PORT
