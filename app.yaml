@@ -1,11 +1,17 @@
 
 runtime: python39
+instance_class: F2  # Instance class (can range from F1 to F4, and B1 to B8 for basic scaling)
 automatic_scaling:
   min_instances: 1
-  max_instances: 10
+  max_instances: 4
   target_cpu_utilization: 0.65
   target_throughput_utilization: 0.75
 
+resources:
+  cpu: 2  # Number of CPU cores
+  memory_gb: 4  # Amount of memory
+  disk_size_gb: 10  # Disk size
+  
 handlers:
   - url: /.*
     script: auto
