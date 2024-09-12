@@ -36,6 +36,10 @@ jobs:
       with:
         project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
 
+    - name: Showing the files present
+      run: |
+        ls -la
+        
     - name: Deploy to Google App Engine
       run: |
-        gcloud app deploy --quiet
+        gcloud app deploy
